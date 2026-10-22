@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#eef2f7"/>
+  <rect x="40" y="35" width="1120" height="630" rx="18" fill="#fff" stroke="#d9e1ec"/>
+  <text x="78" y="82" font-family="Arial" font-size="16" font-weight="700" fill="#3d73e6">OPERATIONS CONSOLE</text>
+  <text x="78" y="132" font-family="Arial" font-size="42" font-weight="700" fill="#172a46">Stockroom</text>
+  <rect x="850" y="65" width="245" height="38" rx="19" fill="#e1f8ef"/>
+  <circle cx="875" cy="84" r="6" fill="#28b88a"/>
+  <text x="892" y="90" font-family="Arial" font-size="14" fill="#168062">Java engine online</text>
+  <g font-family="Arial">
+    <rect x="78" y="165" width="245" height="92" rx="10" fill="#17365d"/>
+    <rect x="342" y="165" width="245" height="92" rx="10" fill="#17365d"/>
+    <rect x="606" y="165" width="245" height="92" rx="10" fill="#17365d"/>
+    <rect x="870" y="165" width="245" height="92" rx="10" fill="#e8f3ff"/>
+    <text x="98" y="194" font-size="13" fill="#b8c8db">PRODUCTS</text><text x="98" y="232" font-size="30" font-weight="700" fill="#d8ff58">6</text>
+    <text x="362" y="194" font-size="13" fill="#b8c8db">UNITS IN STOCK</text><text x="362" y="232" font-size="30" font-weight="700" fill="#d8ff58">356</text>
+    <text x="626" y="194" font-size="13" fill="#b8c8db">INVENTORY VALUE</text><text x="626" y="232" font-size="30" font-weight="700" fill="#d8ff58">$14,920</text>
+    <text x="890" y="194" font-size="13" fill="#58709a">PROFIT</text><text x="890" y="232" font-size="30" font-weight="700" fill="#28b88a">$180</text>
+  </g>
+  <rect x="78" y="286" width="740" height="335" rx="12" fill="#fff" stroke="#d9e1ec"/>
+  <text x="102" y="325" font-family="Arial" font-size="13" font-weight="700" fill="#3d73e6">PRODUCT CATALOGUE</text>
+  <text x="102" y="355" font-family="Arial" font-size="24" font-weight="700" fill="#172a46">All products</text>
+  <g font-family="Arial" font-size="13">
+    <rect x="102" y="380" width="330" height="96" rx="8" fill="#f9fbfd" stroke="#d9e1ec"/><text x="120" y="410" fill="#172131" font-weight="700">Wireless Headphones</text><text x="120" y="433" fill="#718096">Audio · P1001</text><text x="120" y="459" fill="#28b88a">85 units</text><text x="350" y="459" fill="#172a46">$79.99</text>
+    <rect x="456" y="380" width="330" height="96" rx="8" fill="#f9fbfd" stroke="#d9e1ec"/><text x="474" y="410" fill="#172131" font-weight="700">Mechanical Keyboard</text><text x="474" y="433" fill="#718096">Accessories · P1002</text><text x="474" y="459" fill="#28b88a">42 units</text><text x="704" y="459" fill="#172a46">$94.99</text>
+    <rect x="102" y="493" width="330" height="96" rx="8" fill="#f9fbfd" stroke="#d9e1ec"/><text x="120" y="523" fill="#172131" font-weight="700">USB-C Hub</text><text x="120" y="546" fill="#718096">Accessories · P1003</text><text x="120" y="572" fill="#28b88a">120 units</text><text x="350" y="572" fill="#172a46">$34.99</text>
+  </g>
+  <rect x="842" y="286" width="273" height="335" rx="12" fill="#fff" stroke="#d9e1ec"/>
+  <text x="865" y="325" font-family="Arial" font-size="13" font-weight="700" fill="#3d73e6">WAREHOUSE ACTION</text>
+  <text x="865" y="355" font-family="Arial" font-size="24" font-weight="700" fill="#172a46">Record movement</text>
+  <rect x="865" y="380" width="225" height="42" rx="6" fill="#f4f7fb" stroke="#d9e1ec"/><text x="880" y="406" font-family="Arial" font-size="13" fill="#718096">Shipping / sale</text>
+  <rect x="865" y="437" width="225" height="42" rx="6" fill="#f4f7fb" stroke="#d9e1ec"/><text x="880" y="463" font-family="Arial" font-size="13" fill="#718096">Select product</text>
+  <rect x="865" y="510" width="225" height="45" rx="6" fill="#3d73e6"/><text x="922" y="538" font-family="Arial" font-size="14" font-weight="700" fill="#fff">Record movement</text>
+</svg>

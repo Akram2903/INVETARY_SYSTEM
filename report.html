@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stockroom - Java Inventory Management Report</title>
+<style>
+@page{size:A4;margin:17mm 16mm 16mm}*{box-sizing:border-box}body{margin:0;color:#1b2940;background:#f4f7fb;font:10.2pt/1.55 "Segoe UI",Arial,sans-serif}h1,h2,h3{line-height:1.2}h1{color:#fff;font-size:35pt;letter-spacing:-2px;margin:0 0 12px}h2{color:#17365d;border-bottom:2px solid #3d73e6;font-size:18pt;padding-bottom:8px;margin:0 0 17px}h3{color:#2461c4;font-size:13pt;margin:20px 0 7px}p{margin:7px 0 11px}ul,ol{padding-left:24px;margin-top:5px}li{margin:4px 0}.cover{min-height:250mm;display:flex;flex-direction:column;justify-content:center;padding:22mm;background:linear-gradient(135deg,#10253f,#2876a0 65%,#35b895);color:#fff}.cover .eyebrow{color:#d8ff58;text-transform:uppercase;letter-spacing:2px;font-size:9pt;font-weight:800}.cover h2{color:#dff8ff;border:0;font-size:16pt;font-weight:400;margin:5px 0 50px;max-width:600px}.meta{border-top:1px solid #bdebea;max-width:570px;padding-top:14px;color:#e4f7f8}.section{page-break-before:always}.lead{color:#526782;font-size:12pt}.card{background:#fff;border-left:4px solid #3d73e6;padding:12px 15px;margin:13px 0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#17365d;color:#fff;padding:12px;min-height:68px}.stat strong{display:block;color:#d8ff58;font-size:17pt;margin-bottom:4px}.flow{display:flex;align-items:stretch;gap:7px;margin:18px 0}.flow div{flex:1;background:#e8f3ff;border:1px solid #a8c9ee;padding:10px;text-align:center}.flow b{align-self:center;color:#2876a0;font-size:18px}table{border-collapse:collapse;width:100%;margin:10px 0 17px}th{color:#fff;background:#17365d;text-align:left}td,th{border:1px solid #c9d5e3;padding:7px 8px;vertical-align:top}tr:nth-child(even) td{background:#f1f6fb}pre{white-space:pre-wrap;background:#102033;border-radius:5px;color:#d8ff58;padding:13px;font:8pt/1.45 Consolas,"Courier New",monospace}code{color:#2461c4;font-family:Consolas,monospace}.q{border:1px solid #cbd9e7;border-left:3px solid #35b895;background:#fff;padding:10px 13px;margin:10px 0;page-break-inside:avoid}.q strong{color:#17365d}.caption{color:#60748c;font-size:9pt;text-align:center}img{max-width:100%;display:block;margin:12px auto;border:1px solid #bccbd9}.page-note{border-top:1px solid #cbd8e5;color:#60748c;font-size:9pt;margin-top:20px;padding-top:7px}
+</style>
+</head>
+<body>
+<section class="cover">
+<div class="eyebrow">Group C · Object-Oriented Programming Mini Project</div>
+<h1>STOCKROOM</h1>
+<h2>Inventory Management System using Java Object-Oriented Programming</h2>
+<p class="lead" style="color:#e4f7f8">A browser-based inventory application implementing product listing, product details, purchase, shipping, stock balance, profit and loss calculation, and date-range transaction reporting.</p>
+<div class="meta"><p><strong>Core language:</strong> Java 17</p><p><strong>Architecture:</strong> Java HTTP API + responsive HTML/CSS/JavaScript frontend</p><p><strong>Deployment:</strong> Docker container on Render</p><p><strong>Repository:</strong> github.com/Akram2903/INVETARY_SYSTEM</p></div>
+</section>
+
+<section class="section">
+<h2>1. Project Overview</h2>
+<p class="lead">Stockroom is an inventory management system created from the Group C problem statement.</p>
+<p>The system maintains a catalogue of products with product IDs, names, categories, stock quantities, cost prices, and selling prices. It provides operations for incoming stock through purchases and outgoing stock through shipping or sales. The Java backend owns all inventory rules and calculations, while the frontend presents the catalogue, dashboard, action form, and reports in a browser.</p>
+<div class="grid"><div class="stat"><strong>Java 17</strong>OOP core</div><div class="stat"><strong>6</strong>Seed products</div><div class="stat"><strong>REST</strong>HTTP API</div><div class="stat"><strong>Docker</strong>Render deployment</div></div>
+<h3>Required operations implemented</h3>
+<ul><li>List all products.</li><li>Display individual product information in the catalogue.</li><li>Purchase or restock products.</li><li>Ship or sell products.</li><li>Balance stock after every movement.</li><li>Calculate inventory value, revenue, margin, and profit.</li><li>Generate purchase and shipping reports between dates.</li></ul>
+<h3>Project objectives</h3>
+<ul><li>Apply Java classes, objects, encapsulation, collections, constructors, and methods to a practical system.</li><li>Separate domain logic from HTTP and presentation concerns.</li><li>Prevent invalid stock operations such as zero quantities and shipping more than available stock.</li><li>Make the result interactive and deployable for browser demonstration.</li></ul>
+</section>
+
+<section class="section">
+<h2>2. System Architecture</h2>
+<div class="flow"><div>Browser UI<br><small>HTML · CSS · JS</small></div><b>→</b><div>Java HTTP server<br><small>API routes</small></div><b>→</b><div>Inventory domain<br><small>OOP classes</small></div><b>→</b><div>JSON response<br><small>Updated dashboard</small></div></div>
+<h3>Request flow</h3>
+<ol><li>The browser requests the product catalogue and dashboard when the page loads.</li><li>The Java server returns JSON from the in-memory <code>Inventory</code> object.</li><li>When a purchase or shipping form is submitted, JavaScript sends a POST request.</li><li>The server validates the action, finds the product, checks the quantity and stock, and changes the product stock.</li><li>A <code>Transaction</code> object is created and stored.</li><li>The server returns a JSON result; the frontend reloads products and dashboard totals.</li></ol>
+<table><tr><th>Layer</th><th>Files</th><th>Responsibility</th></tr><tr><td>Domain</td><td><code>InventoryServer.java</code></td><td><code>Product</code>, <code>Transaction</code>, and <code>Inventory</code> classes contain the OOP model and business operations.</td></tr><tr><td>HTTP</td><td><code>InventoryServer</code></td><td>Routes requests, parses query/form data, serves JSON, and serves frontend files.</td></tr><tr><td>Frontend</td><td><code>public/index.html</code>, <code>app.js</code>, <code>styles.css</code></td><td>Dashboard, catalogue, search, movement form, report filter, and responsive presentation.</td></tr><tr><td>Deployment</td><td><code>Dockerfile</code>, <code>render.yaml</code></td><td>Compiles Java in a JDK image and runs it in a Java runtime image on Render.</td></tr></table>
+</section>
+
+<section class="section">
+<h2>3. Java OOP Design</h2>
+<h3>Product class</h3>
+<pre>static final class Product {
+    private final String id;
+    private final String name;
+    private final String category;
+    private int stock;
+    private final double costPrice;
+    private final double sellingPrice;
+}</pre>
+<p>A <code>Product</code> represents one inventory item. Its identity and price fields are final after construction. Stock is mutable because purchases and shipments change it. The private fields demonstrate encapsulation: external code does not directly manipulate the product data.</p>
+<table><tr><th>Field</th><th>Meaning</th></tr><tr><td><code>id</code></td><td>Unique product identifier such as P1001.</td></tr><tr><td><code>name</code></td><td>Human-readable product name.</td></tr><tr><td><code>category</code></td><td>Product grouping such as Audio or Storage.</td></tr><tr><td><code>stock</code></td><td>Current number of available units.</td></tr><tr><td><code>costPrice</code></td><td>Amount paid to acquire one unit.</td></tr><tr><td><code>sellingPrice</code></td><td>Amount charged for one shipped/sold unit.</td></tr></table>
+<h3>Transaction class</h3>
+<p>A <code>Transaction</code> records an inventory movement. It stores the operation type, the product object, quantity, customer or supplier label, total amount, and the date. Purchase transactions use cost price, while shipping transactions use selling price.</p>
+<h3>Inventory class</h3>
+<p><code>Inventory</code> owns two collections: a product catalogue and a transaction history. It is the main business service. Its methods add products, process movements, serialize products, calculate dashboard totals, and create date-filtered reports.</p>
+<h3>InventoryServer class</h3>
+<p><code>InventoryServer</code> is the application entry point. It creates the Java HTTP server, seeds initial data, registers URL contexts, and connects HTTP requests to the inventory domain.</p>
+</section>
+
+<section class="section">
+<h2>4. Product Initialization and Java Collections</h2>
+<pre>private static void seedProducts() {
+    inventory.addProduct(new Product(
+        "P1001", "Wireless Headphones", "Audio",
+        85, 49.99, 79.99
+    ));
+    inventory.addProduct(new Product(
+        "P1002", "Mechanical Keyboard", "Accessories",
+        42, 58.00, 94.99
+    ));
+}</pre>
+<p>The server starts with six sample products so the dashboard is immediately useful after deployment. Each constructor call creates a Product object and passes it to the Inventory catalogue.</p>
+<pre>private final List&lt;Product&gt; products = new ArrayList&lt;&gt;();
+private final List&lt;Transaction&gt; transactions = new ArrayList&lt;&gt;();</pre>
+<p><code>ArrayList</code> provides dynamic storage for the catalogue and history. Stream operations search, filter, map, sort, and reduce these collections. This keeps the implementation concise while still expressing the inventory rules clearly.</p>
+<h3>Product lookup</h3>
+<pre>Product product = products.stream()
+    .filter(item -&gt; item.id.equals(productId))
+    .findFirst()
+    .orElseThrow(() -&gt; new IllegalArgumentException(
+        "Product not found"));</pre>
+<p>The stream checks every product until the requested ID is found. If no product matches, an explicit exception is raised and converted into a clear HTTP 400 error.</p>
+</section>
+
+<section class="section">
+<h2>5. Purchase and Shipping Logic</h2>
+<pre>synchronized Transaction process(
+    String action, String productId,
+    int quantity, String customer) {
+    if (quantity &lt;= 0)
+        throw new IllegalArgumentException(
+            "Quantity must be greater than zero");
+
+    Product product = find product by ID;
+    if ("shipping".equals(action)
+        &amp;&amp; product.stock &lt; quantity)
+        throw new IllegalArgumentException(
+            "Insufficient stock");
+
+    if ("purchase".equals(action))
+        product.stock += quantity;
+    else
+        product.stock -= quantity;
+}</pre>
+<h3>Purchase/restock</h3>
+<p>A purchase represents stock arriving from a supplier. The quantity is added to the product stock. The total purchase amount is calculated using <code>quantity × costPrice</code>. A transaction is then saved.</p>
+<h3>Shipping/sale</h3>
+<p>A shipment represents stock leaving the warehouse for a customer. The method first verifies that enough stock exists. Only then is the quantity subtracted. The total sale amount is calculated using <code>quantity × sellingPrice</code>.</p>
+<h3>Why the method is synchronized</h3>
+<p>The method is synchronized so two simultaneous requests cannot update the same inventory state at the same time in an unsafe order. This is a simple concurrency protection for the in-memory domain model.</p>
+<h3>Transaction creation</h3>
+<pre>double total = quantity * (
+    "purchase".equals(action)
+        ? product.costPrice
+        : product.sellingPrice
+);
+Transaction transaction = new Transaction(
+    action, product, quantity, customer, total
+);
+transactions.add(transaction);
+return transaction;</pre>
+</section>
+
+<section class="section">
+<h2>6. Stock Balance and Profit/Loss</h2>
+<h3>Stock balance</h3>
+<p>The current stock is stored directly on each Product object. Purchases increase it and shipments decrease it. The dashboard calculates total units with:</p>
+<pre>int totalUnits = products.stream()
+    .mapToInt(item -&gt; item.stock)
+    .sum();</pre>
+<h3>Inventory value</h3>
+<p>Inventory value estimates the cost invested in stock still held:</p>
+<pre>double inventoryValue = products.stream()
+    .mapToDouble(item -&gt; item.stock * item.costPrice)
+    .sum();</pre>
+<h3>Revenue</h3>
+<p>Revenue includes only shipping transactions because a shipment is treated as a completed sale:</p>
+<pre>double revenue = transactions.stream()
+    .filter(item -&gt; item.type.equals("shipping"))
+    .mapToDouble(item -&gt; item.total)
+    .sum();</pre>
+<h3>Profit</h3>
+<p>The cost of shipped goods is calculated using the product cost price. Profit is revenue minus that cost:</p>
+<pre>double cost = transactions.stream()
+    .filter(item -&gt; item.type.equals("shipping"))
+    .mapToDouble(item -&gt;
+        item.quantity * item.product.costPrice)
+    .sum();
+double profit = revenue - cost;</pre>
+<p>This is a basic gross profit calculation. It does not include salaries, shipping expenses, taxes, discounts, or other operating costs.</p>
+<h3>Low-stock detection</h3>
+<pre>long lowStock = products.stream()
+    .filter(item -&gt; item.stock &lt; 25)
+    .count();</pre>
+<p>Products with fewer than 25 units are displayed as low-stock items. The frontend uses a different color for these products.</p>
+</section>
+
+<section class="section">
+<h2>7. Purchase and Transaction Reports</h2>
+<pre>synchronized String reportJson(String from, String to) {
+    LocalDate start = from == null || from.isBlank()
+        ? LocalDate.MIN : LocalDate.parse(from);
+    LocalDate end = to == null || to.isBlank()
+        ? LocalDate.MAX : LocalDate.parse(to);
+
+    return transactions.stream()
+        .filter(item -&gt; !item.date.isBefore(start)
+            &amp;&amp; !item.date.isAfter(end))
+        .sorted(Comparator.comparing(item -&gt; item.date))
+        .map(Transaction::json)
+        .reduce((a, b) -&gt; a + "," + b)
+        .orElse("");
+}</pre>
+<p>The report accepts optional ISO dates in <code>YYYY-MM-DD</code> format. Missing dates mean no lower or upper restriction. Transactions are included when their date is between the selected start and end dates, inclusive. The output is sorted chronologically.</p>
+<h3>Report fields</h3>
+<ul><li>Transaction type: purchase or shipping.</li><li>Product name.</li><li>Quantity moved.</li><li>Total amount.</li><li>Transaction date.</li></ul>
+<h3>Frontend date filter</h3>
+<p>The browser sends <code>view=report</code>, <code>from</code>, and <code>to</code> query values. It renders each returned transaction in the report panel. If no records match, it shows an empty-state message.</p>
+</section>
+
+<section class="section">
+<h2>8. Java HTTP Server and API</h2>
+<h3>Server creation</h3>
+<pre>int port = Integer.parseInt(
+    System.getenv().getOrDefault("PORT", "3000"));
+HttpServer server = HttpServer.create(
+    new InetSocketAddress(port), 0);
+server.createContext("/api/inventory",
+    InventoryServer::handleInventory);
+server.createContext("/api/health",
+    InventoryServer::handleHealth);
+server.createContext("/",
+    InventoryServer::serveFrontend);
+server.setExecutor(
+    Executors.newFixedThreadPool(8));
+server.start();</pre>
+<p>The project uses Java's built-in <code>com.sun.net.httpserver.HttpServer</code>, so no external backend framework is required. Render supplies a PORT environment variable, while local execution defaults to 3000. A fixed thread pool allows the server to handle multiple requests.</p>
+<h3>API endpoints</h3>
+<table><tr><th>Method</th><th>Endpoint</th><th>Purpose</th></tr><tr><td>GET</td><td><code>/api/inventory</code></td><td>Dashboard totals: product count, units, value, revenue, profit, low stock, transactions.</td></tr><tr><td>GET</td><td><code>/api/inventory?view=products</code></td><td>Returns all product information.</td></tr><tr><td>GET</td><td><code>/api/inventory?view=report&amp;from=...&amp;to=...</code></td><td>Returns date-filtered transaction history.</td></tr><tr><td>POST</td><td><code>/api/inventory</code></td><td>Processes purchase or shipping form data.</td></tr><tr><td>GET</td><td><code>/api/health</code></td><td>Render health check.</td></tr></table>
+<h3>POST data</h3>
+<pre>action=purchase|shipping
+productId=P1001
+quantity=5
+customer=Supplier or customer name</pre>
+</section>
+
+<section class="section">
+<h2>9. Request Parsing and Error Handling</h2>
+<pre>private static Map&lt;String, String&gt; parseQuery(String query) {
+    Map&lt;String, String&gt; values = new HashMap&lt;&gt;();
+    if (query == null || query.isBlank()) return values;
+    for (String pair : query.split("&amp;")) {
+        String[] parts = pair.split("=", 2);
+        String key = decode(parts[0]);
+        String value = parts.length &gt; 1
+            ? decode(parts[1]) : "";
+        values.put(key, value);
+    }
+    return values;
+}</pre>
+<p>The server parses both URL query parameters and URL-encoded POST bodies. URL decoding allows spaces and special characters to be represented correctly.</p>
+<h3>Status behavior</h3>
+<table><tr><th>Condition</th><th>Response</th></tr><tr><td>Valid dashboard, products, report, or movement</td><td>HTTP 200 with JSON data.</td></tr><tr><td>Invalid action, product, or quantity</td><td>HTTP 400 with an error message.</td></tr><tr><td>Unsupported HTTP method</td><td>HTTP 405.</td></tr><tr><td>Unexpected server failure</td><td>HTTP 500 with a generic error and server-side stack trace.</td></tr><tr><td>Unknown frontend file</td><td>HTTP 404.</td></tr></table>
+<h3>Frontend file safety</h3>
+<pre>Path file = publicDirectory
+    .resolve(requested.substring(1)).normalize();
+if (!file.startsWith(publicDirectory)
+    || !Files.exists(file)
+    || Files.isDirectory(file)) {
+    // 404
+}</pre>
+<p>The normalized path check prevents a request from escaping the public directory through path traversal segments.</p>
+</section>
+
+<section class="section">
+<h2>10. Frontend Implementation</h2>
+<h3>Dashboard and catalogue</h3>
+<p>The frontend calls the dashboard and products endpoints on startup. It displays product count, units in stock, inventory value, profit, low-stock count, category, product ID, selling price, and per-unit margin.</p>
+<pre>async function loadDashboard() {
+    const response = await fetch('/api/inventory');
+    const data = await response.json();
+    document.querySelector('#products').textContent = data.products;
+    document.querySelector('#units').textContent = data.units;
+    document.querySelector('#value').textContent =
+        money(data.inventoryValue);
+    document.querySelector('#profit').textContent =
+        money(data.profit);
+}</pre>
+<h3>Search</h3>
+<p>Search works in the browser by matching the entered text against product name, category, and ID. It filters the already-loaded catalogue without another server request.</p>
+<h3>Movement form</h3>
+<p>The form sends URL-encoded data to the Java API. A successful movement reloads product stock and all dashboard totals. An error is shown in the notice area without changing the UI to a false success state.</p>
+<h3>HTML escaping</h3>
+<p>Product names and report values are escaped before being inserted into HTML. This prevents user-controlled text from being interpreted as markup.</p>
+</section>
+
+<section class="section">
+<h2>11. User Interface</h2>
+<p>The interface is designed as an operations dashboard with a calm blue and mint palette. It separates information, catalogue browsing, warehouse actions, and reporting.</p>
+<ul><li>Top metrics provide an immediate inventory summary.</li><li>The catalogue shows products in searchable cards.</li><li>The action panel handles purchase and shipping.</li><li>The report panel accepts a from/to date range.</li><li>Low-stock values use a warning color.</li><li>The layout becomes a single column on smaller screens.</li></ul>
+<img src="report-assets/inventory-dashboard.png" alt="Stockroom inventory dashboard">
+<p class="caption">Figure 1. Stockroom dashboard showing product catalogue, inventory metrics, warehouse actions, and report controls.</p>
+</section>
+
+<section class="section">
+<h2>12. Technology Stack and Project Structure</h2>
+<table><tr><th>Technology</th><th>Role</th></tr><tr><td>Java 17</td><td>OOP domain model, inventory rules, calculations, HTTP server.</td></tr><tr><td>Java Collections</td><td>ArrayList and streams for product and transaction management.</td></tr><tr><td>HTML5</td><td>Dashboard structure and forms.</td></tr><tr><td>CSS3</td><td>Responsive dashboard styling and visual states.</td></tr><tr><td>JavaScript</td><td>Fetch requests, search, dynamic cards, form submission, report rendering.</td></tr><tr><td>Docker</td><td>Reproducible Java build and runtime environment.</td></tr><tr><td>Render</td><td>Public web deployment and health checks.</td></tr><tr><td>GitHub</td><td>Source repository: Akram2903/INVETARY_SYSTEM.</td></tr></table>
+<pre>inventory-management-java/
+├── Dockerfile
+├── render.yaml
+├── pom.xml
+├── README.md
+├── public/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+└── src/main/java/com/inventory/
+    └── InventoryServer.java</pre>
+</section>
+
+<section class="section">
+<h2>13. Docker and Render Deployment</h2>
+<h3>Multi-stage Dockerfile</h3>
+<pre>FROM eclipse-temurin:17-jdk AS build
+WORKDIR /app
+COPY src ./src
+RUN mkdir -p target/classes &amp;&amp; \
+    javac -d target/classes \
+    src/main/java/com/inventory/InventoryServer.java
+
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/classes ./target/classes
+COPY public ./public
+CMD ["java", "-cp", "target/classes",
+     "com.inventory.InventoryServer"]</pre>
+<p>The first image contains a JDK and compiles the source. The second image contains only the Java runtime and compiled classes plus frontend files. This separates build tools from the production runtime.</p>
+<h3>Render configuration</h3>
+<pre>services:
+  - type: web
+    name: java-inventory-management
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health</pre>
+<p>Render builds the Dockerfile, starts the Java process, and calls the health endpoint. No manual environment variable is needed. Render's PORT is read by the Java server automatically.</p>
+<h3>Deployment correction</h3>
+<p>The initial Render attempt used <code>mvn clean package</code> while Render had been configured as Node, producing <code>mvn: command not found</code>. The project was corrected to Docker, which provides the required JDK and JRE images consistently.</p>
+</section>
+
+<section class="section">
+<h2>14. Complexity and Design Analysis</h2>
+<table><tr><th>Operation</th><th>Complexity</th><th>Reason</th></tr><tr><td>Find product</td><td>O(P)</td><td>Products are stored in an ArrayList and searched linearly by ID.</td></tr><tr><td>Purchase/shipping</td><td>O(P)</td><td>Lookup is linear; stock update and transaction append are O(1).</td></tr><tr><td>Dashboard</td><td>O(P + T)</td><td>Streams scan products and transactions.</td></tr><tr><td>Report</td><td>O(T log T)</td><td>Transactions are filtered and sorted by date.</td></tr><tr><td>Space</td><td>O(P + T)</td><td>Catalogue and transaction history remain in memory.</td></tr></table>
+<p>Here, P is the number of products and T is the number of transactions. For a larger production system, a database and indexed product lookup could improve persistence and scalability. The in-memory design is appropriate for a focused OOP mini project.</p>
+<h3>Encapsulation and responsibility</h3>
+<p>The Inventory class owns business state and rules. The Product class owns product data. The Transaction class owns movement records. The server translates HTTP requests but does not implement stock mathematics itself. This separation makes the design easier to understand and extend.</p>
+</section>
+
+<section class="section">
+<h2>15. Testing and Verification</h2>
+<table><tr><th>Test</th><th>Expected result</th><th>Result</th></tr><tr><td>Compile Java source</td><td>Classes generated successfully.</td><td>Passed with javac.</td></tr><tr><td>List products</td><td>Six seeded products returned.</td><td>Passed.</td></tr><tr><td>Dashboard</td><td>Initial total of 356 units returned.</td><td>Passed.</td></tr><tr><td>Purchase P1001 × 5</td><td>Stock increases and purchase transaction is saved.</td><td>Passed.</td></tr><tr><td>Shipping P1001 × 2</td><td>Stock decreases and shipment is saved.</td><td>Passed.</td></tr><tr><td>Report</td><td>Transactions returned by date range.</td><td>Passed.</td></tr><tr><td>Excessive shipping</td><td>Request rejected with insufficient-stock error.</td><td>Passed.</td></tr><tr><td>Health endpoint</td><td>HTTP 200 and status OK.</td><td>Passed.</td></tr><tr><td>Homepage</td><td>HTTP 200 and dashboard HTML served.</td><td>Passed.</td></tr></table>
+<h3>Example sequence</h3>
+<pre>Initial stock: P1001 = 85
+Purchase 5:    P1001 = 90
+Shipping 2:    P1001 = 88
+Profit:        revenue from shipping - cost of shipped units
+Invalid 999:   rejected because available stock is insufficient</pre>
+</section>
+
+<section class="section">
+<h2>16. Technical Questions and Answers</h2>
+<div class="q"><strong>Q1. What is the purpose of this project?</strong><br>It manages products, stock movements, inventory value, profit, and transaction reports through a browser interface backed by Java OOP logic.</div>
+<div class="q"><strong>Q2. Which OOP concepts are used?</strong><br>Classes and objects, encapsulation through private fields, constructors, composition between Inventory and Product/Transaction objects, methods, and separation of responsibilities.</div>
+<div class="q"><strong>Q3. What is the Product class?</strong><br>It is the domain representation of one catalogue item, containing identity, category, stock, cost price, and selling price.</div>
+<div class="q"><strong>Q4. What is the Transaction class?</strong><br>It records a purchase or shipping event with type, product, quantity, customer/supplier, total amount, and date.</div>
+<div class="q"><strong>Q5. What does Inventory do?</strong><br>It owns the product and transaction collections and performs lookup, stock changes, dashboard calculations, and reporting.</div>
+<div class="q"><strong>Q6. What happens during a purchase?</strong><br>The requested product is found, quantity is validated, stock is increased, cost-based total is calculated, and a purchase transaction is stored.</div>
+<div class="q"><strong>Q7. What happens during shipping?</strong><br>The product is found, quantity is validated against available stock, stock is decreased, selling-price total is calculated, and a shipping transaction is stored.</div>
+<div class="q"><strong>Q8. How is insufficient stock handled?</strong><br>The operation throws an IllegalArgumentException before changing stock. The HTTP layer returns HTTP 400 with a descriptive message.</div>
+<div class="q"><strong>Q9. How is profit calculated?</strong><br>Profit equals revenue from shipments minus the cost of the units shipped. Revenue uses selling price and cost uses cost price.</div>
+<div class="q"><strong>Q10. Is inventory value the same as revenue?</strong><br>No. Inventory value is the cost value of stock still held. Revenue is money from completed shipments.</div>
+<div class="q"><strong>Q11. Why is stock mutable but prices final?</strong><br>Stock changes during operations, while the seeded product prices remain fixed for this project. A production system could support controlled price updates.</div>
+<div class="q"><strong>Q12. Why is the method synchronized?</strong><br>To prevent concurrent requests from interleaving stock updates unsafely in the shared in-memory Inventory object.</div>
+<div class="q"><strong>Q13. Why use ArrayList?</strong><br>It provides dynamic storage and convenient iteration and stream operations. It is adequate for the scale of this mini project.</div>
+<div class="q"><strong>Q14. What is the time complexity of a product lookup?</strong><br>O(P), because the ArrayList is searched linearly by product ID.</div>
+<div class="q"><strong>Q15. What is the time complexity of reporting?</strong><br>Filtering is O(T) and sorting matching transactions is O(T log T) in the worst case.</div>
+<div class="q"><strong>Q16. Why use Java's built-in HttpServer?</strong><br>It keeps the deployment lightweight and demonstrates that Java can provide an HTTP API without an external framework.</div>
+<div class="q"><strong>Q17. What does the frontend do?</strong><br>It displays JSON data, submits purchase/shipping forms, filters products, reloads dashboard data, and displays reports.</div>
+<div class="q"><strong>Q18. Why is HTML escaping used?</strong><br>Product and transaction text is displayed in generated HTML. Escaping prevents special input from being interpreted as markup.</div>
+<div class="q"><strong>Q19. Why is Docker used on Render?</strong><br>The Render dashboard did not provide a native Java runtime option for this service. Docker supplies a Java 17 JDK for compilation and JRE for execution.</div>
+<div class="q"><strong>Q20. What is the purpose of /api/health?</strong><br>Render calls it to confirm that the server has started and is responding successfully.</div>
+<div class="q"><strong>Q21. Is data persistent?</strong><br>No. The current version stores data in memory, so restarting the service resets the seeded catalogue and transactions. A database can be added as an extension.</div>
+<div class="q"><strong>Q22. How could the project be improved?</strong><br>Add a database, authentication, product CRUD, supplier/customer entities, pagination, indexed lookup, audit logs, and separate service/repository packages.</div>
+</section>
+
+<section class="section">
+<h2>17. Conclusion</h2>
+<p>Stockroom applies object-oriented Java programming to a complete inventory workflow. Product and transaction objects are managed by an Inventory service that enforces stock rules and calculates operational values. A lightweight Java HTTP server exposes that logic to an interactive browser dashboard.</p>
+<p>The project covers the requested inventory operations while demonstrating encapsulation, collections, stream processing, validation, concurrency awareness, API design, responsive frontend development, and Docker-based cloud deployment.</p>
+<div class="card"><strong>Central result:</strong> the system maintains an accurate in-memory inventory state, records purchases and shipments, prevents invalid stock movement, calculates financial summaries, and exposes all functionality through a deployable web interface.</div>
+<p class="page-note">Repository: github.com/Akram2903/INVETARY_SYSTEM</p>
+</section>
+</body>
+</html>
