@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stockroom | Inventory Management</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="header">
+      <div><p class="eyebrow">Operations console</p><h1>Stockroom</h1><p class="subtitle">Inventory management powered by Java OOP</p></div>
+      <div class="status"><span></span> Java engine online</div>
+    </header>
+
+    <section class="metrics">
+      <div class="metric"><small>Products</small><strong id="products">—</strong><span>catalog items</span></div>
+      <div class="metric"><small>Units in stock</small><strong id="units">—</strong><span>across warehouse</span></div>
+      <div class="metric"><small>Inventory value</small><strong id="value">—</strong><span>at cost price</span></div>
+      <div class="metric accent"><small>Profit</small><strong id="profit">—</strong><span>from shipments</span></div>
+    </section>
+
+    <section class="layout">
+      <div class="card catalog">
+        <div class="section-head"><div><p class="eyebrow">Product catalogue</p><h2>All products</h2></div><input id="search" placeholder="Search products..."></div>
+        <div id="productsGrid" class="products-grid"></div>
+      </div>
+      <aside class="side">
+        <div class="card action-card">
+          <p class="eyebrow">Warehouse action</p><h2>Record movement</h2>
+          <form id="actionForm">
+            <label>Action<select id="action"><option value="shipping">Shipping / sale</option><option value="purchase">Purchase / restock</option></select></label>
+            <label>Product<select id="product"></select></label>
+            <label>Quantity<input id="quantity" type="number" min="1" value="1"></label>
+            <label>Customer / supplier<input id="customer" placeholder="Optional name"></label>
+            <button>Record movement →</button>
+          </form>
+          <p id="notice" class="notice">Choose a product to begin.</p>
+        </div>
+        <div class="card report-card"><p class="eyebrow">Purchase report</p><h2>Transaction log</h2><div class="date-row"><input id="from" type="date"><input id="to" type="date"></div><button id="reportButton" class="secondary">Load report</button><div id="report" class="report"></div></div>
+      </aside>
+    </section>
+    <footer><span>Java 17 · Object-oriented inventory engine</span><span id="lowStock">— low-stock items</span></footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: java-inventory-management
+    runtime: java
+    buildCommand: mvn clean package
+    startCommand: java -cp target/classes com.inventory.InventoryServer
+    healthCheckPath: /api/health
