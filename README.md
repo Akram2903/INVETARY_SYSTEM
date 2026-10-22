@@ -23,11 +23,11 @@ The inventory domain is implemented in Java 17 using object-oriented classes:
 
 ## Run locally
 
-Requirements: Java 17 and Maven 3.8+.
+Requirement: Java 17 or newer.
 
 ```powershell
 cd D:\c++\inventory-management-java
-mvn clean package
+javac -d target\classes src\main\java\com\inventory\InventoryServer.java
 java -cp target\classes com.inventory.InventoryServer
 ```
 
@@ -52,13 +52,16 @@ customer=Supplier or customer name
 
 ## Render deployment
 
-The included `render.yaml` builds with Maven and starts the Java HTTP server:
+The included `render.yaml` compiles directly with `javac` and starts the Java
+HTTP server:
 
 ```text
-Build: mvn clean package
+Build: mkdir -p target/classes && javac -d target/classes src/main/java/com/inventory/InventoryServer.java
 Start: java -cp target/classes com.inventory.InventoryServer
 Health: /api/health
 ```
 
 No environment variables are required other than Render's `PORT`, which is
-read automatically by the server.
+read automatically by the server. The direct `javac` build also works when
+Render creates the service as a Java or Node web service, as long as a JDK is
+available.
