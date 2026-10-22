@@ -23,7 +23,7 @@ The inventory domain is implemented in Java 17 using object-oriented classes:
 
 ## Run locally
 
-Requirement: Java 17 or newer.
+Requirement: Java 17 or newer, or Docker.
 
 ```powershell
 cd D:\c++\inventory-management-java
@@ -52,16 +52,15 @@ customer=Supplier or customer name
 
 ## Render deployment
 
-The included `render.yaml` compiles directly with `javac` and starts the Java
-HTTP server:
+The included `Dockerfile` compiles the Java source in a JDK build stage and
+runs it in a smaller Java runtime image. Render uses Docker because its
+dashboard does not provide a native Java runtime option:
 
 ```text
-Build: mkdir -p target/classes && javac -d target/classes src/main/java/com/inventory/InventoryServer.java
-Start: java -cp target/classes com.inventory.InventoryServer
+Runtime: Docker
+Dockerfile: ./Dockerfile
 Health: /api/health
 ```
 
 No environment variables are required other than Render's `PORT`, which is
-read automatically by the server. The direct `javac` build also works when
-Render creates the service as a Java or Node web service, as long as a JDK is
-available.
+read automatically by the server.
