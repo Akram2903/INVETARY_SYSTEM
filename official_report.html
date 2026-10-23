@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inventory Management System - OOP Mini Project Report</title>
+<style>
+@page{size:A4;margin:20mm 18mm 18mm}*{box-sizing:border-box}body{margin:0;color:#222;font:11pt/1.55 "Times New Roman",serif}h1,h2,h3{font-family:"Times New Roman",serif}h1{font-size:27pt;line-height:1.25;text-align:center;text-transform:uppercase;margin:20px 0}h2{font-size:18pt;text-align:center;text-transform:uppercase;margin:0 0 22px;padding-bottom:8px;border-bottom:1px solid #333}h3{font-size:14pt;margin:18px 0 8px;text-decoration:underline}p{text-align:justify;margin:8px 0 12px}ul,ol{margin-top:5px}.cover{min-height:250mm;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:20mm}.cover .institution{font-size:16pt;font-weight:bold;margin-top:7mm}.cover .subtitle{font-size:14pt;margin-top:20mm}.cover .project{font-size:23pt;font-weight:bold;margin:10mm 0 20mm}.cover .submitted{margin-top:20mm;font-size:13pt}.cover .team{margin:8mm auto;font-size:13pt;border-collapse:collapse}.cover .team td{padding:4px 18px;text-align:left}.cover .team td:last-child{text-align:center}.formal{page-break-before:always}.center{text-align:center}.signature{display:flex;justify-content:space-between;margin-top:35mm}.signature div{width:30%;text-align:center;border-top:1px solid #222;padding-top:6px}.certificate{margin-top:35mm}.toc table,.record table{width:100%;border-collapse:collapse}.toc td{padding:5px 3px}.toc td:last-child{text-align:right}.box{border:1px solid #555;padding:15px;margin:18px 0}.figure{page-break-inside:avoid;margin:16px 0;text-align:center}.figure img{max-width:100%;max-height:125mm;border:1px solid #999}.caption{font-size:10pt;margin-top:6px;text-align:center}.code{font:8.2pt/1.42 Consolas,"Courier New",monospace;white-space:pre-wrap;background:#f1f1f1;border:1px solid #bbb;padding:10px;margin:10px 0}.record th,.record td{border:1px solid #777;padding:6px;vertical-align:top}.record th{background:#e7e7e7}.page-break{page-break-before:always}.footer-note{border-top:1px solid #777;margin-top:28px;padding-top:8px;font-size:9pt;text-align:center}
+</style>
+</head>
+<body>
+<section class="cover">
+<div class="institution">OBJECT-ORIENTED PROGRAMMING MINI PROJECT</div>
+<div class="subtitle">A PROJECT REPORT ON</div>
+<div class="project">INVENTORY MANAGEMENT SYSTEM</div>
+<p class="center">A Java-based web application for product catalogue management,<br>stock movement, financial calculation and transaction reporting</p>
+<div class="submitted">Submitted by</div>
+<table class="team"><tr><td>Siddhi Dherange</td><td>25</td></tr><tr><td>Jayati Hembade</td><td>18</td></tr><tr><td>Akram Kadri</td><td>21</td></tr></table>
+<div style="margin-top:28mm">Academic Year 2026</div>
+</section>
+
+<section class="formal certificate">
+<h2>Certificate</h2>
+<p class="center">This is to certify that the project report entitled</p>
+<p class="center"><strong>“Inventory Management System”</strong></p>
+<p>This project has been developed and submitted as a mini project for the Object-Oriented Programming subject. The project demonstrates the application of Java classes, objects, encapsulation, collections, HTTP communication and web application development to solve an inventory management problem.</p>
+<p>The work has been carried out by the following students:</p>
+<table class="team" style="margin:12px auto"><tr><td>Siddhi Dherange</td><td>25</td></tr><tr><td>Jayati Hembade</td><td>18</td></tr><tr><td>Akram Kadri</td><td>21</td></tr></table>
+<div class="signature"><div>Project Guide</div><div>Subject Teacher</div><div>Head of Department</div></div>
+</section>
+
+<section class="formal">
+<h2>Declaration</h2>
+<p>We hereby declare that the project entitled <strong>“Inventory Management System”</strong> is our original work developed for the Object-Oriented Programming mini project. The system has been implemented using Java as the primary programming language, with a browser-based frontend and Docker-based deployment configuration.</p>
+<p>All design, implementation, testing and documentation work described in this report relates to the project developed by our group. External libraries, platform documentation and development tools used during the work are acknowledged in the references section.</p>
+<div class="signature"><div>Siddhi Dherange<br>Roll No. 25</div><div>Jayati Hembade<br>Roll No. 18</div><div>Akram Kadri<br>Roll No. 21</div></div>
+</section>
+
+<section class="formal">
+<h2>Acknowledgement</h2>
+<p>We express our sincere gratitude to our subject teacher and department for providing us with the opportunity to develop this Object-Oriented Programming mini project. The project helped us understand how Java concepts can be applied to a practical business problem.</p>
+<p>We are thankful for the guidance and academic support received throughout the planning, implementation, testing and deployment stages. We also acknowledge the use of Java development tools, browser technologies, Docker and Render for building and presenting the system.</p>
+<p>Finally, we thank all group members for their cooperation in designing the interface, implementing the Java backend, testing inventory operations and preparing the final project demonstration.</p>
+</section>
+
+<section class="formal">
+<h2>Abstract</h2>
+<p>Inventory Management System is a web-based application developed to manage products and warehouse stock through a simple interactive dashboard. The application implements the operations specified in the mini project problem statement: listing products, displaying product information, purchasing or restocking, shipping or selling, balancing stock, calculating inventory value and profit, and generating purchase and transaction reports for a selected date range.</p>
+<p>The main application logic is implemented in Java using object-oriented programming. The system contains separate classes for products, transactions, inventory operations and HTTP server responsibilities. A Java HTTP server exposes JSON endpoints that are consumed by a responsive HTML, CSS and JavaScript frontend. The application validates quantities, prevents shipping beyond available stock, updates stock after every movement and records transactions for reporting.</p>
+<p>The project is packaged for deployment using Docker. A multi-stage Dockerfile compiles the Java source with a Java Development Kit and runs the compiled application in a Java Runtime Environment. The deployment configuration is compatible with Render and includes a health-check endpoint.</p>
+</section>
+
+<section class="formal toc">
+<h2>Table of Contents</h2>
+<table><tr><td>1. Introduction</td><td>1</td></tr><tr><td>2. Problem Definition and Objectives</td><td>2</td></tr><tr><td>3. System Analysis and Requirements</td><td>3</td></tr><tr><td>4. System Design</td><td>5</td></tr><tr><td>5. Object-Oriented Implementation</td><td>7</td></tr><tr><td>6. Functional Modules</td><td>10</td></tr><tr><td>7. Web Interface and API</td><td>14</td></tr><tr><td>8. Deployment and Testing</td><td>17</td></tr><tr><td>9. Results and Screenshots</td><td>19</td></tr><tr><td>10. Conclusion and Future Scope</td><td>21</td></tr><tr><td>References</td><td>23</td></tr></table>
+</section>
+
+<section class="formal">
+<h2>1. Introduction</h2>
+<p>Inventory is the collection of products maintained by an organization for sale or operational use. Accurate stock information is important because an organization must know what products are available, how many units are present, when stock is moving, and whether the activity is generating profit.</p>
+<p>Manual inventory recording can lead to incorrect quantities, delayed updates and difficulty in preparing reports. The Inventory Management System developed in this project provides a digital interface for managing product information and stock movement. It combines a Java object-oriented backend with a web frontend so that inventory operations can be performed through a browser.</p>
+<p>The project is based on the Group C mini project requirement for an inventory management system. It has been designed as an educational application, with the main focus on Java OOP concepts, clear business rules and interactive presentation.</p>
+<h3>1.1 Project Scope</h3>
+<ul><li>Maintain a product catalogue with product IDs, categories, stock and prices.</li><li>Record products purchased from suppliers.</li><li>Record products shipped or sold to customers.</li><li>Calculate current stock, inventory value, revenue and profit.</li><li>Identify products with low stock.</li><li>Display transactions within a selected date range.</li><li>Deploy the application as a web service.</li></ul>
+<h3>1.2 Existing System</h3>
+<p>In a basic manual system, product information and stock changes may be written in registers or maintained in separate files. Such a system makes it difficult to calculate current stock and profit immediately. It also makes it difficult to produce a date-wise movement report.</p>
+<h3>1.3 Proposed System</h3>
+<p>The proposed system centralizes product and transaction information in a Java inventory object. Every purchase increases stock, every shipment decreases stock after validation, and every movement is recorded. The dashboard calculates important values from the current application state and presents them through a browser.</p>
+</section>
+
+<section class="formal">
+<h2>2. Problem Definition and Objectives</h2>
+<h3>2.1 Problem Definition</h3>
+<p>To design and implement an inventory management system using maximum practical features of Object-Oriented Programming in Java. The system should support product listing, individual product information, purchase, shipping, stock balance, loss and profit calculation, and purchase reporting between selected dates.</p>
+<h3>2.2 Objectives</h3>
+<ol><li>To create a Java-based inventory domain model.</li><li>To apply encapsulation using classes with private data members.</li><li>To represent products and inventory movements as objects.</li><li>To update stock accurately after purchase and shipping operations.</li><li>To prevent invalid quantities and shipments exceeding available stock.</li><li>To calculate inventory value, revenue, cost and profit.</li><li>To generate a date-filtered transaction report.</li><li>To provide an interactive browser-based interface.</li><li>To package and deploy the application using Docker and Render.</li></ol>
+<h3>2.3 Significance</h3>
+<p>The project connects classroom concepts with a practical business workflow. It demonstrates that OOP is not limited to isolated examples: classes can model products, transactions and business services, while methods can protect and modify the state according to defined rules.</p>
+</section>
+
+<section class="formal">
+<h2>3. System Analysis and Requirements</h2>
+<h3>3.1 Functional Requirements</h3>
+<table class="record"><tr><th>Requirement</th><th>Description</th></tr><tr><td>Product listing</td><td>Display all products with ID, name, category, available stock, selling price and margin.</td></tr><tr><td>Product information</td><td>Show individual product information in the catalogue cards and product selector.</td></tr><tr><td>Purchase</td><td>Add purchased quantity to available stock and record the purchase amount at cost price.</td></tr><tr><td>Shipping</td><td>Subtract shipped quantity only when sufficient stock is available and record sale amount at selling price.</td></tr><tr><td>Stock balance</td><td>Display total units and current stock for each product.</td></tr><tr><td>Financial calculation</td><td>Calculate inventory value, revenue, cost of shipped goods and profit.</td></tr><tr><td>Report</td><td>Display purchase and shipping transactions filtered by start and end dates.</td></tr><tr><td>Deployment health</td><td>Provide an endpoint that confirms the Java server is running.</td></tr></table>
+<h3>3.2 Non-Functional Requirements</h3>
+<ul><li><strong>Usability:</strong> The dashboard should be understandable without command-line interaction.</li><li><strong>Reliability:</strong> Invalid operations should not modify stock.</li><li><strong>Maintainability:</strong> Business logic should be separated into meaningful classes and methods.</li><li><strong>Portability:</strong> The application should run locally and inside a Docker container.</li><li><strong>Responsiveness:</strong> The interface should adapt to smaller screens.</li></ul>
+<h3>3.3 Hardware and Software Requirements</h3>
+<table class="record"><tr><th>Category</th><th>Requirement</th></tr><tr><td>Development system</td><td>Any modern Windows, Linux or macOS computer.</td></tr><tr><td>Language</td><td>Java 17 or newer.</td></tr><tr><td>Frontend</td><td>Modern web browser with JavaScript enabled.</td></tr><tr><td>Deployment</td><td>Docker-compatible cloud service such as Render.</td></tr><tr><td>Source control</td><td>Git and GitHub.</td></tr></table>
+</section>
+
+<section class="formal">
+<h2>4. System Design</h2>
+<h3>4.1 Architecture</h3>
+<p>The system follows a simple three-layer arrangement. The presentation layer contains the browser interface. The server layer receives requests and returns JSON. The domain layer contains the Java classes that maintain products, transactions and inventory calculations.</p>
+<div class="box center"><strong>Browser Interface</strong><br>HTML + CSS + JavaScript<br><br>↓ HTTP requests and JSON responses<br><br><strong>Java HTTP Server</strong><br>Request routing and validation<br><br>↓ method calls<br><br><strong>Inventory Domain Model</strong><br>Product + Transaction + Inventory</div>
+<h3>4.2 Main Classes</h3>
+<table class="record"><tr><th>Class</th><th>Responsibility</th></tr><tr><td>InventoryServer</td><td>Starts the server, seeds products, handles API requests, serves frontend files and returns JSON.</td></tr><tr><td>Product</td><td>Represents a product and stores its identity, category, stock and prices.</td></tr><tr><td>Transaction</td><td>Represents a purchase or shipping movement with quantity, amount and date.</td></tr><tr><td>Inventory</td><td>Owns the product catalogue and transaction history and performs business operations.</td></tr></table>
+<h3>4.3 Data Flow</h3>
+<ol><li>The frontend requests product and dashboard data.</li><li>The server reads the request path and query values.</li><li>The Inventory object calculates or updates the requested information.</li><li>The server serializes the result as JSON.</li><li>The frontend renders the returned values.</li></ol>
+</section>
+
+<section class="formal">
+<h2>5. Object-Oriented Implementation</h2>
+<h3>5.1 Product Encapsulation</h3>
+<div class="code">static final class Product {
+    private final String id;
+    private final String name;
+    private final String category;
+    private int stock;
+    private final double costPrice;
+    private final double sellingPrice;
+}</div>
+<p>The Product class encapsulates all information belonging to an inventory item. The fields are private, so the class controls access to its internal state. Product identity and pricing are initialized through the constructor. Stock is mutable because stock changes during purchases and shipping.</p>
+<h3>5.2 Transaction Object</h3>
+<p>The Transaction class stores the type of movement, product, quantity, customer or supplier name, total amount and date. Creating a separate transaction object preserves an auditable history rather than only changing the current stock number.</p>
+<h3>5.3 Inventory Composition</h3>
+<div class="code">private final List&lt;Product&gt; products = new ArrayList&lt;&gt;();
+private final List&lt;Transaction&gt; transactions = new ArrayList&lt;&gt;();</div>
+<p>The Inventory class is composed of Product and Transaction objects. This is an example of object composition: the Inventory object manages collections of related domain objects.</p>
+<h3>5.4 Validation and Controlled State Change</h3>
+<div class="code">if (quantity &lt;= 0)
+    throw new IllegalArgumentException(
+        "Quantity must be greater than zero");
+
+if ("shipping".equals(action)
+    &amp;&amp; product.stock &lt; quantity)
+    throw new IllegalArgumentException(
+        "Insufficient stock for " + product.name);</div>
+<p>Validation is performed before stock is changed. Therefore an invalid operation produces an error and leaves the inventory state unchanged.</p>
+</section>
+
+<section class="formal">
+<h2>6. Functional Modules</h2>
+<h3>6.1 Product Catalogue</h3>
+<p>The system seeds six sample products: Wireless Headphones, Mechanical Keyboard, USB-C Hub, Smart Desk Lamp, Portable SSD 1TB and Webcam Full HD. Each item has a unique ID, category, stock quantity, cost price and selling price.</p>
+<h3>6.2 Purchase Module</h3>
+<p>A purchase or restock increases product stock. The purchase total is calculated as quantity multiplied by cost price. The movement is stored as a Transaction with type <code>purchase</code>.</p>
+<h3>6.3 Shipping Module</h3>
+<p>A shipping or sale operation decreases product stock. Before the change, the system checks that the available stock is greater than or equal to the requested quantity. The shipping total uses selling price and the movement is stored as type <code>shipping</code>.</p>
+<h3>6.4 Balance Stock Module</h3>
+<p>The balance module displays the stock for each product and calculates the total units across the catalogue. Products below 25 units are identified as low-stock items.</p>
+<h3>6.5 Loss and Profit Calculation</h3>
+<p>Inventory value is calculated from the current stock multiplied by cost price. Revenue is the total of shipping transactions. The cost of goods sold is the quantity shipped multiplied by product cost price. Profit is revenue minus the cost of shipped goods.</p>
+<h3>6.6 Purchase Report Module</h3>
+<p>The report module accepts optional start and end dates. It filters transactions whose dates fall within the inclusive range and sorts matching transactions by date before returning them to the interface.</p>
+</section>
+
+<section class="formal">
+<h2>7. Web Interface and API</h2>
+<h3>7.1 Dashboard</h3>
+<p>The dashboard displays product count, units in stock, inventory value and profit as summary cards. The product catalogue provides search support and shows stock and margin values for every product.</p>
+<h3>7.2 Warehouse Action Form</h3>
+<p>The movement form lets a user select purchase or shipping, select a product, enter quantity and optionally enter a customer or supplier. After submission, the interface shows a confirmation or error notice and refreshes the current inventory values.</p>
+<h3>7.3 API Endpoints</h3>
+<table class="record"><tr><th>Method</th><th>Endpoint</th><th>Purpose</th></tr><tr><td>GET</td><td>/api/inventory</td><td>Returns dashboard totals.</td></tr><tr><td>GET</td><td>/api/inventory?view=products</td><td>Returns the complete product catalogue.</td></tr><tr><td>GET</td><td>/api/inventory?view=report&amp;from=DATE&amp;to=DATE</td><td>Returns filtered transactions.</td></tr><tr><td>POST</td><td>/api/inventory</td><td>Processes purchase and shipping form data.</td></tr><tr><td>GET</td><td>/api/health</td><td>Returns the server health status for Render.</td></tr></table>
+<h3>7.4 JSON and Frontend Synchronization</h3>
+<p>The Java server returns JSON objects and arrays. JavaScript reads the responses with the Fetch API, updates the DOM and reloads the product list and dashboard after every successful movement. Product and report text is HTML-escaped before being inserted into the page.</p>
+</section>
+
+<section class="formal">
+<h2>8. Deployment and Testing</h2>
+<h3>8.1 Docker Deployment</h3>
+<p>The project uses a multi-stage Dockerfile. The build stage uses <code>eclipse-temurin:17-jdk</code> to compile Java source files. The runtime stage uses <code>eclipse-temurin:17-jre</code>, copies compiled classes and frontend files, and starts the Java server.</p>
+<div class="code">FROM eclipse-temurin:17-jdk AS build
+WORKDIR /app
+COPY src ./src
+RUN mkdir -p target/classes &amp;&amp; \
+    javac -d target/classes \
+    src/main/java/com/inventory/InventoryServer.java
+
+FROM eclipse-temurin:17-jre
+COPY --from=build /app/target/classes ./target/classes
+COPY public ./public
+CMD ["java", "-cp", "target/classes",
+     "com.inventory.InventoryServer"]</div>
+<h3>8.2 Render Configuration</h3>
+<p>Render is configured to deploy the service as a Docker web service. The server reads the PORT variable provided by Render. No additional secret or environment variable is required for the current in-memory implementation.</p>
+<h3>8.3 Testing</h3>
+<table class="record"><tr><th>Test case</th><th>Expected result</th><th>Status</th></tr><tr><td>Compile Java source</td><td>Classes are generated successfully.</td><td>Passed</td></tr><tr><td>List products</td><td>Six seeded products are returned.</td><td>Passed</td></tr><tr><td>Purchase five units</td><td>Stock increases and transaction is recorded.</td><td>Passed</td></tr><tr><td>Ship two units</td><td>Stock decreases and transaction is recorded.</td><td>Passed</td></tr><tr><td>Ship more than available stock</td><td>Operation is rejected without changing stock.</td><td>Passed</td></tr><tr><td>Generate report</td><td>Transactions are returned for selected dates.</td><td>Passed</td></tr><tr><td>Health endpoint</td><td>Server returns HTTP 200 and status OK.</td><td>Passed</td></tr><tr><td>Homepage</td><td>Dashboard is served successfully.</td><td>Passed</td></tr></table>
+</section>
+
+<section class="formal">
+<h2>9. Results and Screenshots</h2>
+<p>The deployed application provides a functional inventory dashboard. The first screenshot shows the initial catalogue and stock values. The second screenshot shows a purchase operation after five units have been added to Wireless Headphones, with updated stock and report date controls.</p>
+<div class="figure"><img src="report-assets/deployed-initial.png"><div class="caption">Figure 1: Deployed Stockroom dashboard with catalogue, stock summary and warehouse action controls.</div></div>
+<div class="figure"><img src="report-assets/deployed-purchase.png"><div class="caption">Figure 2: Stockroom after a purchase/restock operation with updated units and transaction report controls.</div></div>
+<h3>Observed Results</h3>
+<ul><li>The application reports six catalogue products.</li><li>The initial dashboard shows 356 units in stock.</li><li>Inventory value is calculated from product cost prices.</li><li>Purchase operations update stock immediately.</li><li>Shipping operations are blocked when stock is insufficient.</li><li>The interface indicates Java engine availability.</li><li>Transaction history can be filtered by dates.</li></ul>
+</section>
+
+<section class="formal">
+<h2>10. Conclusion and Future Scope</h2>
+<h3>10.1 Conclusion</h3>
+<p>The Inventory Management System successfully implements the operations required in the mini project problem statement. It uses Java object-oriented design to model products, transactions and inventory responsibilities. The web interface makes the system easy to demonstrate, while the backend ensures that stock and financial calculations are performed consistently.</p>
+<p>The project demonstrates how encapsulation, composition, collections, stream processing, validation and HTTP communication can be combined into a practical application. Docker deployment makes the Java project reproducible and suitable for hosting on Render.</p>
+<h3>10.2 Limitations</h3>
+<p>The current version stores data in memory. Therefore, data returns to the seeded state when the server restarts. The current version also uses a simple product list and does not include user authentication or a persistent database.</p>
+<h3>10.3 Future Scope</h3>
+<ul><li>Add a relational database for permanent product and transaction storage.</li><li>Add product creation, editing and deletion.</li><li>Add supplier and customer classes.</li><li>Add user login and role-based permissions.</li><li>Add invoices, discounts, tax and shipping cost fields.</li><li>Add exportable PDF or CSV reports.</li><li>Add dashboard charts and reorder notifications.</li><li>Use a repository layer and indexed product lookup for larger datasets.</li></ul>
+</section>
+
+<section class="formal">
+<h2>References</h2>
+<ol><li>Java Platform Standard Edition documentation, Java language and collections concepts.</li><li>Java HTTP Server API documentation.</li><li>HTML, CSS and JavaScript web platform documentation.</li><li>Docker documentation for multi-stage image builds.</li><li>Render documentation for web services, Docker deployment and health checks.</li><li>Project repository: <code>https://github.com/Akram2903/INVETARY_SYSTEM</code></li></ol>
+<div class="footer-note">Inventory Management System · Object-Oriented Programming Mini Project · Siddhi Dherange, Jayati Hembade, Akram Kadri</div>
+</section>
+</body>
+</html>
